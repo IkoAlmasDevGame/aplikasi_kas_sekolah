@@ -13,7 +13,7 @@
   <li>Mengedit Profile account</li>
 </ol>
 <br>
-http://localhost/aplikasi_kas_sekolah/index.php
+<a href='http://localhost/aplikasi_kas_sekolah/index.php'>Aplikasi Kas Sekolah</a>
 <br>
 old username and old password :
 <br>
