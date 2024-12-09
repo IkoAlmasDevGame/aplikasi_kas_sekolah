@@ -15,6 +15,7 @@
 <br>
 <a href='http://localhost/aplikasi_kas_sekolah/index.php'>Aplikasi Kas Sekolah</a>
 <br>
+<br>
 old username and old password :
 <br>
 admin :<br>
