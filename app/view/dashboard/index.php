@@ -1,0 +1,89 @@
+<?php require_once("../ui/header.php"); ?>
+<?php require_once("../ui/sidebar.php"); ?>
+<!-- === Layout Sidebar Awal -->
+<?php
+$jml_siswa = mysqli_fetch_assoc(mysqli_query($konfigs, "SELECT count(id_siswa) as jml_siswa FROM siswa"));
+$jml_siswa = $jml_siswa['jml_siswa'];
+
+$jml_user = mysqli_fetch_assoc(mysqli_query($konfigs, "SELECT count(id_user) as jml_user FROM user"));
+$jml_user = $jml_user['jml_user'];
+
+$jml_jabatan = mysqli_fetch_assoc(mysqli_query($konfigs, "SELECT count(id_jabatan) as jml_jabatan FROM jabatan"));
+$jml_jabatan = $jml_jabatan['jml_jabatan'];
+
+$jml_pengeluaran = mysqli_fetch_assoc(mysqli_query($konfigs, "SELECT sum(jumlah_pengeluaran) as jml_pengeluaran FROM pengeluaran"));
+$jml_pengeluaran = $jml_pengeluaran['jml_pengeluaran'];
+
+$jml_uang_kas = mysqli_fetch_assoc(mysqli_query($konfigs, "SELECT sum(minggu_ke_1 + minggu_ke_2 + minggu_ke_3 + minggu_ke_4) as jml_uang_kas FROM uang_kas"));
+$jml_uang_kas = $jml_uang_kas['jml_uang_kas'];
+?>
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <?php if ($_SESSION['id_jabatan'] == '1'): ?>
+            <div class="col-lg-4">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h5><i class="fas fa-fw fa-cog"></i> Jabatan</h5>
+                        <h6 class="text-muted">Jumlah Jabatan: <?= $jml_jabatan; ?></h6>
+                        <div class="text-end">
+                            <a href="?page=jabatan" class="btn btn-info"><i class="fas fa-fw fa-align-justify"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h5><i class="fas fa-fw fa-users"></i> User</h5>
+                        <h6 class="text-muted">Jumlah User: <?= $jml_user; ?></h6>
+                        <div class="text-end">
+                            <a href="?page=user-profile" class="btn btn-info"><i
+                                    class="fas fa-fw fa-align-justify"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <?php endif; ?>
+            <div class="col-lg-4">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h5><i class="fas fa-fw fa-user-tie"></i> Siswa</h5>
+                        <h6 class="text-muted">Jumlah Siswa: <?= $jml_siswa; ?></h6>
+                        <div class="text-end">
+                            <a href="?page=siswa" class="btn btn-info"><i class="fas fa-fw fa-align-justify"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h5><i class="text-success fas fa-fw fa-caret-up"></i> <i
+                                class="text-success fas fa-fw fa-dollar-sign"></i> Uang Kas</h5>
+                        <h6 class="text-muted">Jumlah Uang Kas: Rp.
+                            <?= number_format($jml_uang_kas - $jml_pengeluaran); ?></h6>
+                        <div class="text-end">
+                            <a href="?page=uang_kas" class="btn btn-info"><i class="fas fa-fw fa-align-justify"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h5><i class="text-danger fas fa-fw fa-caret-down"></i><i
+                                class="text-danger fas fa-fw fa-dollar-sign"></i> Pengeluaran</h5>
+                        <h6 class="text-muted">Jumlah Pengeluaran: Rp. <?= number_format($jml_pengeluaran); ?></h6>
+                        <div class="text-end">
+                            <a href="?page=pengeluaran" class="btn btn-info"><i
+                                    class="fas fa-fw fa-align-justify"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- === Layout Sidebar Akhir -->
+<?php require_once("../ui/footer.php"); ?>
